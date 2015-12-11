@@ -1,0 +1,42 @@
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $nav-height;
+  box-shadow: 0 0 2px rgba(0,0,0,.5);
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.nav__wrapper {
+  max-width: $max-width;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.nav__logo-wrapper {
+  text-decoration: none;
+}
+
+.nav__logo {
+  font-size: 1em;
+  margin: 0;
+  user-select: none;
+  color: $text-color;
+  text-decoration: none;
+}
+
+.btn--nav {
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+.btn--nav + .btn--nav {
+  margin-left: 1em;
+}

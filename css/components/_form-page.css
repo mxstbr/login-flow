@@ -1,0 +1,26 @@
+.form-page__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+  width: 100%;
+}
+
+.form-page__form-wrapper {
+  max-width: 350px;
+  width: 100%;
+  margin: 1em 1em;
+  border: 1px solid $very-light-grey;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+}
+
+.form-page__form-heading {
+  text-align: center;
+  font-size: 1em;
+}
+
+.form-page__form-header {
+  padding: 1em;
+}

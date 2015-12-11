@@ -1,0 +1,15 @@
+.wrapper {
+	max-width: $max-width;
+	margin: 0 auto;
+	display: flex;
+	height: 100%;
+}
+
+#app {
+	height: 100%;
+}
+
+.home__wrapper h1,
+.home__wrapper h2 {
+	text-align: center;
+}

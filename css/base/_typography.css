@@ -1,0 +1,15 @@
+/**
+ * Basic typography style for copy text
+ */
+body {
+  color: $text-color;
+  font-family: $text-font-stack;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures, contextual;
+  font-feature-settings: "kern", "liga", "clig", "calt";
+}
+
+p {
+  font-family: Georgia, sans-serif;
+  line-height: 1.5em;
+}
