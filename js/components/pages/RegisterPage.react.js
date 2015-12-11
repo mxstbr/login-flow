@@ -36,7 +36,7 @@ export default class RegisterPage extends Component {
 						<h2 className="form-page__form-heading">Register</h2>
 					</div>
 					{/* While the form is sending, show the loading indicator,
-						otherwise show "Sign in" on the submit button */}
+						otherwise show "Register" on the submit button */}
 		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={this._register.bind(this)} btnText={currentlySending ? <LoadingIndicator /> : "Register" }/>
 				</div>
 			</div>

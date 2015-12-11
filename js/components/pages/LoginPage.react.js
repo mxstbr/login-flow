@@ -33,11 +33,11 @@ export default class LoginPage extends Component {
 			<div className="form-page__wrapper">
 				<div className="form-page__form-wrapper">
 					<div className="form-page__form-header">
-						<h2 className="form-page__form-heading">Sign In</h2>
+						<h2 className="form-page__form-heading">Log In</h2>
 					</div>
 					{/* While the form is sending, show the loading indicator,
-						otherwise show "Sign in" on the submit button */}
-		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={this._logIn.bind(this)} btnText={currentlySending ? <LoadingIndicator /> : "Sign In" }/>
+						otherwise show "Log in" on the submit button */}
+		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={this._logIn.bind(this)} btnText={currentlySending ? <LoadingIndicator /> : "Log In" }/>
 				</div>
 			</div>
 		);

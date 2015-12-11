@@ -40,7 +40,7 @@ var auth = {
     // authenticated
     if (this.loggedIn()) {
       this.onChange(true);
-      callback(true);
+      if (callback) callback(true);
       return;
     }
     // Post a fake request to a fake endpoint (see below)
@@ -50,12 +50,12 @@ var auth = {
       if (response.authenticated) {
         localStorage.token = response.token;
         this.onChange(true);
-        callback(true);
+        if (callback) callback(true);
       } else {
         // If there was a problem authenticating the user, show an error on the
         // form
         this.onChange(false, response.error);
-        callback(false);
+        if (callback) callback(false);
       }
     });
   },
@@ -86,7 +86,7 @@ var auth = {
       } else {
         // If there was a problem registering, show the error
         this.onChange(false, response.error);
-        callback(false);
+        if (callback) callback(false);
       }
     });
   },
@@ -130,9 +130,9 @@ var server = {
   // Petrends to log a user in
   login(username, password, callback) {
     const userExists = this.doesUserExist(username);
-    // If the user exists and the password fits sign the user in
+    // If the user exists and the password fits log the user in
     if (userExists && bcrypt.compareSync(password, users[username])) {
-      callback({
+      if (callback) callback({
         authenticated: true,
         token: Math.random().toString(36).substring(7)
       });
@@ -148,7 +148,7 @@ var server = {
           type: "user-doesnt-exist"
         }
       }
-      callback({
+      if (callback) callback({
         authenticated: false,
         error: error
       });
@@ -161,12 +161,12 @@ var server = {
       // in localStorage
       users[username] = bcrypt.hashSync(password, salt);
       localStorage.users = JSON.stringify(users);
-      callback({
+      if (callback) callback({
         registered: true
       });
     } else {
       // If the username is already in use, throw the username-exists error
-      callback({
+      if (callback) callback({
         registered: false,
         error: {
           type: "username-exists"

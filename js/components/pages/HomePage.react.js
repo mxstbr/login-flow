@@ -26,8 +26,8 @@ class HomePage extends Component {
 					<div>
 						<h1>Welcome to Login Flow!</h1>
 						<p>This app is a demo of a login flow written in React.js. It uses Redux for data management, ServiceWorker and AppCache for offline capability, Webpack as a bundler, PostCSS as a CSS preprocessor and a wide variety of small plugins.</p>
-						<Link to="/login" className="btn btn--signin">Sign in</Link>
-						<Link to="/register" className="btn btn--signin">Register</Link>
+						<Link to="/login" className="btn btn--login">Log In</Link>
+						<Link to="/register" className="btn btn--register">Register</Link>
 					</div>
 				)}
 			</div>
