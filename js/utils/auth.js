@@ -108,7 +108,7 @@ module.exports = auth;
 var fakeRequest = {
   // Pretend to post to a remote server
   post(endpoint, data, callback) {
-    // Delay the call by a random amount between 500ms and 2000ms
+    // Delay the call by a random amount between 100ms and 2000ms
     // to simulate network latency
     setTimeout(() => {
       switch (endpoint) {
@@ -121,7 +121,7 @@ var fakeRequest = {
         default:
           break;
       }
-    }, (Math.random() * 2000) + 500);
+    }, (Math.random() * 2000) + 100);
   }
 }
 
