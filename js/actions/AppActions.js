@@ -24,10 +24,29 @@
  */
 
 import { SET_AUTH, CHANGE_FORM, SENDING_REQUEST } from '../constants/AppConstants';
+import auth from '../utils/auth';
+import history from '../utils/history';
 
 export function setAuthState(newState) {
-  return function(dispatch) {
+  return (dispatch) => {
     return dispatch(actuallySetAuthState(newState));
+  }
+}
+
+export function login(username, password) {
+  return (dispatch) => {
+    // Show the loading indicator
+    dispatch(sendingRequest(true));
+    // Use auth.js to fake a request
+    auth.login(username, password, (loggedIn) => {
+      // When the request is finished, hide the loading indicator
+      dispatch(sendingRequest(false));
+      dispatch(actuallySetAuthState(loggedIn));
+      if (loggedIn === true) {
+        // If the login worked, forward the user to the homepage
+        history.replaceState(null, '/');
+      }
+    });
   }
 }
 

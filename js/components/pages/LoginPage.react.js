@@ -10,7 +10,7 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import Form from '../Form.react';
 import auth from '../../utils/auth';
-import { sendingRequest } from '../../actions/AppActions';
+import { login } from '../../actions/AppActions';
 import LoadingIndicator from '../LoadingIndicator.react';
 
 export default class LoginPage extends Component {
@@ -37,29 +37,14 @@ export default class LoginPage extends Component {
 					</div>
 					{/* While the form is sending, show the loading indicator,
 						otherwise show "Log in" on the submit button */}
-		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={this._logIn.bind(this)} btnText={currentlySending ? <LoadingIndicator /> : "Log In" }/>
+		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={::this._login} btnText={currentlySending ? <LoadingIndicator /> : "Log In" }/>
 				</div>
 			</div>
 		);
   }
 
-	// Logs in a user
-	_logIn(username, password) {
-		// Show the loading indicator
-		this.props.dispatch(sendingRequest(true));
-		// Use auth.js to fake a request
-    auth.login(username, password, (loggedIn) => {
-			// When the request is finished, hide the loading indicator
-			this.props.dispatch(sendingRequest(false));
-			if (loggedIn === true) {
-				// If the login worked, forward the user to the homepage
-				if (this.props.location.state && this.props.location.state.nextPathname) {
-					this.props.history.replaceState(null, this.props.location.state.nextPathname)
-				} else {
-					this.props.history.replaceState(null, '/')
-				}
-			}
-		});
+	_login(username, password) {
+		this.props.dispatch(login(username, password));
 	}
 }
 

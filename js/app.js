@@ -33,8 +33,8 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { homeReducer } from './reducers/reducers';
 import { Router, Route, IndexRoute } from 'react-router';
-import createHistory from 'history/lib/createBrowserHistory';
 import FontFaceObserver from 'fontfaceobserver';
+import history from './utils/history';
 
 // When Open Sans is loaded, add the js-open-sans-loaded class to the body
 // which swaps out the fonts
@@ -63,7 +63,7 @@ const store = createStoreWithMiddleware(homeReducer);
 // which are all wrapped in the App component, which contains the navigation etc
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={createHistory()}>
+    <Router history={history}>
       <Route component={App}>
         <Route path="/" component={HomePage} />
         <Route path="/login" component={LoginPage} />
