@@ -50,6 +50,30 @@ export function login(username, password) {
   }
 }
 
+export function logout() {
+  return (dispatch) => {
+    dispatch(sendingRequest(true));
+    auth.logout(() => {
+      dispatch(sendingRequest(false));
+      dispatch(actuallySetAuthState(false));
+    });
+  }
+}
+
+export function register(username, password) {
+  return (dispatch) => {
+    dispatch(sendingRequest(true));
+    auth.register(username, password, (loggedIn) => {
+      dispatch(sendingRequest(false));
+      dispatch(actuallySetAuthState(loggedIn));
+
+      if (loggedIn) {
+        history.replaceState(null, '/');
+      }
+    });
+  }
+}
+
 function actuallySetAuthState(newState) {
   return { type: SET_AUTH, newState };
 }

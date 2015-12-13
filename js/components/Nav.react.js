@@ -8,17 +8,14 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import auth from '../utils/auth';
+import { logout } from '../actions/AppActions';
 
 class Nav extends Component {
   render() {
     // Render either the Log In and register buttons, or the logout button
     // based on the current authentication state.
     const navButtons = this.props.loggedIn ? (
-        <a href="#" className="btn btn--login btn--nav" onClick={(evt) => {
-          evt.preventDefault();
-          auth.logout();
-        }}>Logout</a>
+        <a href="#" className="btn btn--login btn--nav" onClick={::this._logout}>Logout</a>
       ) : (
         <div>
           <Link to="/register" className="btn btn--login btn--nav">Register</Link>
@@ -34,6 +31,10 @@ class Nav extends Component {
         </div>
       </div>
     );
+  }
+
+  _logout() {
+    this.props.dispatch(logout());
   }
 }
 

@@ -56,9 +56,10 @@ var auth = {
   /**
    * Logs the current user out
    */
-  logout() {
-    fakeRequest.post('/login', {}, () => {
+  logout(callback) {
+    fakeRequest.post('/logout', {}, () => {
       this.onChange(false);
+      if (callback) callback();
     });
   },
   /**
@@ -225,7 +226,7 @@ var server = {
    * @param  {Function} callback Called after the user was logged out
    */
   logout(callback) {
-    delete localStorage.token;
+    localStorage.removeItem('token');
     if (callback) callback();
   },
   /**

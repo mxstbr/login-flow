@@ -9,8 +9,7 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import Form from '../Form.react';
-import auth from '../../utils/auth';
-import { sendingRequest } from '../../actions/AppActions';
+import { sendingRequest, register } from '../../actions/AppActions';
 import LoadingIndicator from '../LoadingIndicator.react';
 
 export default class RegisterPage extends Component {
@@ -37,7 +36,7 @@ export default class RegisterPage extends Component {
 					</div>
 					{/* While the form is sending, show the loading indicator,
 						otherwise show "Register" on the submit button */}
-		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={this._register.bind(this)} btnText={currentlySending ? <LoadingIndicator /> : "Register" }/>
+		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={::this._register} btnText={currentlySending ? <LoadingIndicator /> : "Register" }/>
 				</div>
 			</div>
 		);
@@ -45,21 +44,7 @@ export default class RegisterPage extends Component {
 
 	// Register a user
 	_register(username, password) {
-		// Show the loading indicator
-		this.props.dispatch(sendingRequest(true));
-		// Use auth.js to fake a request
-		auth.register(username, password, (loggedIn) => {
-			// When the request is finished, hide the loading indicator
-			this.props.dispatch(sendingRequest(false));
-			if (loggedIn) {
-				// If the register worked, forward the user to the homepage
-				if (this.props.location.state && this.props.location.state.nextPathname) {
-					this.props.history.replaceState(null, this.props.location.state.nextPathname)
-				} else {
-					this.props.history.replaceState(null, '/')
-				}
-			}
-		});
+		this.props.dispatch(register(username, password));
 	}
 }
 

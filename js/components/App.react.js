@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return(
       <div className="wrapper">
-        <Nav loggedIn={this.props.data.loggedIn} history={this.props.history} location={this.props.location} />
+        <Nav loggedIn={this.props.data.loggedIn} history={this.props.history} location={this.props.location} dispatch={this.props.dispatch} />
         { this.props.children }
       </div>
     )
