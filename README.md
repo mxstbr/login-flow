@@ -1,6 +1,6 @@
-# React.js Boilerplate
+# Login Flow
 
-Quick setup for new performance orientated, offline–first React.js applications featuring Redux, hot–reloading, PostCSS, react-router, ServiceWorker, AppCache, FontFaceObserver and Mocha.
+This application demonstrates what a React.js based register/login workflow might look like on the Frontend. I used my [react-boilerplate](https://github.com/mxstbr/react-boilerplate) as a starting point — the app thus uses  Redux, PostCSS, react-router, ServiceWorker, AppCache, bcrypt and lots more.
 
 -----
 
@@ -31,16 +31,6 @@ Quick setup for new performance orientated, offline–first React.js application
 5. Run `npm start` to start the local web server.
 
 6. Go to `http://localhost:3000` and you should see the app running!
-
-## Building & Deploying
-
-1. Run `npm run build`, which will compile all the necessary files in a `build` folder.
-
-2. Upload the contents of the `build` folder to your web server.
-
-3. ?????? (You figure this part out)
-
-4. Profit!
 
 ## CSS
 
@@ -94,9 +84,7 @@ The folder structure of the JS files reflects how [Redux](https://github.com/gae
 
 * `reducers`: Reducers manage the state of an app, basically a simplified implementation of Stores in Flux. For an introduction to reducers, watch [this talk](https://www.youtube.com/watch?v=xsSnOQynTHs) by @gaearon.
 
-## Testing
-
-Unit tests live in the `test` directory, and are run with `npm test`. There are two files in there already, testing that the current AppActions and Reducers are working correctly. Should you be stuck and have no idea what is going on check out the official [Mocha documentation](http://mochajs.org)!
+* `utils`: Utility files.
 
 ## Opinionated features
 
@@ -116,13 +104,11 @@ If you simply use web fonts in your project, the page will stay blank until thes
 
 ### Offline access
 
-Using a `ServiceWorker` and the `App Cache`, your application is cached for offline usage. TO cache a file, add it to `cache` variable of the `AppCachePlugin` in `webpack.build.config.js` and to the `urlsToCache` variable in the `serviceworker.js` file.
+Using a `ServiceWorker` and the `AppCache`, the application is cached for offline usage. To cache a file, add it to the `urlsToCache` variable in the `serviceworker.js` file.
 
 ### Add To Homescreen
 
-On Chrome for Android (soon hopefully more browsers), users can add a webpage to the homescreen. Combined with offline caching, this means your web app can be used exactly like a native application.
-
-The name and icon to be displayed are set in the `manifest.json` file. Change them to your project name and icon, and try it!
+On Chrome for Android (soon hopefully more browsers), users can add a webpage to the homescreen. Combined with offline caching, this means the app can be used exactly like a native application.
 
 ## Gotchas
 
