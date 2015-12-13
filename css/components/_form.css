@@ -69,7 +69,7 @@
   position: relative;
 }
 
-.form__err-animation {
+.js-form__err-animation {
   animation: shake 150ms ease-in-out;
 }
 

@@ -38,13 +38,19 @@ export function login(username, password) {
     // Show the loading indicator
     dispatch(sendingRequest(true));
     // Use auth.js to fake a request
-    auth.login(username, password, (loggedIn) => {
+    auth.login(username, password, (success, err) => {
       // When the request is finished, hide the loading indicator
       dispatch(sendingRequest(false));
-      dispatch(actuallySetAuthState(loggedIn));
-      if (loggedIn === true) {
-        // If the login worked, forward the user to the homepage
+      dispatch(actuallySetAuthState(success));
+      if (success === true) {
+        // If the login worked, forward the user to the homepage and clear the form
         history.replaceState(null, '/');
+        changeForm({
+          username: "",
+          password: ""
+        });
+      } else {
+        requestFailed(err);
       }
     });
   }
@@ -53,9 +59,13 @@ export function login(username, password) {
 export function logout() {
   return (dispatch) => {
     dispatch(sendingRequest(true));
-    auth.logout(() => {
-      dispatch(sendingRequest(false));
-      dispatch(actuallySetAuthState(false));
+    auth.logout((success, err) => {
+      if (success === true) {
+        dispatch(sendingRequest(false));
+        dispatch(actuallySetAuthState(false));
+      } else {
+        requestFailed(err);
+      }
     });
   }
 }
@@ -63,12 +73,18 @@ export function logout() {
 export function register(username, password) {
   return (dispatch) => {
     dispatch(sendingRequest(true));
-    auth.register(username, password, (loggedIn) => {
+    auth.register(username, password, (success, err) => {
       dispatch(sendingRequest(false));
-      dispatch(actuallySetAuthState(loggedIn));
+      dispatch(actuallySetAuthState(success));
 
-      if (loggedIn) {
+      if (success) {
         history.replaceState(null, '/');
+        changeForm({
+          username: "",
+          password: ""
+        });
+      } else {
+        requestFailed(err);
       }
     });
   }
@@ -84,4 +100,22 @@ export function changeForm(newState) {
 
 export function sendingRequest(sending) {
   return { type: SENDING_REQUEST, sending };
+}
+
+let lastErrType = "";
+
+function requestFailed(err) {
+  // Remove the class of the last error so there can only ever be one
+  const form = document.querySelector('.form-page__form-wrapper');
+  form.classList.remove('js-form__err--' + lastErrType);
+  // And add the respective classes
+  form.classList.add('js-form__err');
+  form.classList.add('js-form__err-animation');
+  form.classList.add('js-form__err--' + err.type);
+  lastErrType = err.type;
+  // Remove the animation class after the animation is finished, so it
+  // can play again on the next error
+  setTimeout(() => {
+    form.classList.remove('js-form__err-animation');
+  }, 150);
 }
