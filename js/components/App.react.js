@@ -10,7 +10,6 @@
 import React, { Component } from 'react';
 import Nav from './Nav.react';
 import { connect } from 'react-redux';
-import { setAuthState, changeForm, sendingRequest } from '../actions/AppActions';
 import auth from '../utils/auth';
 
 class App extends Component {

@@ -27,12 +27,11 @@ import { SET_AUTH, CHANGE_FORM, SENDING_REQUEST } from '../constants/AppConstant
 import auth from '../utils/auth';
 import history from '../utils/history';
 
-export function setAuthState(newState) {
-  return (dispatch) => {
-    return dispatch(actuallySetAuthState(newState));
-  }
-}
-
+/**
+ * Logs an user in
+ * @param  {string} username The username of the user to be logged in
+ * @param  {string} password The password of the user to be logged in
+ */
 export function login(username, password) {
   return (dispatch) => {
     // Show the loading indicator
@@ -41,14 +40,14 @@ export function login(username, password) {
     auth.login(username, password, (success, err) => {
       // When the request is finished, hide the loading indicator
       dispatch(sendingRequest(false));
-      dispatch(actuallySetAuthState(success));
+      dispatch(setAuthState(success));
       if (success === true) {
         // If the login worked, forward the user to the homepage and clear the form
         history.replaceState(null, '/');
-        changeForm({
+        dispatch(changeForm({
           username: "",
           password: ""
-        });
+        }));
       } else {
         requestFailed(err);
       }
@@ -56,13 +55,16 @@ export function login(username, password) {
   }
 }
 
+/**
+ * Logs the current user out
+ */
 export function logout() {
   return (dispatch) => {
     dispatch(sendingRequest(true));
     auth.logout((success, err) => {
       if (success === true) {
         dispatch(sendingRequest(false));
-        dispatch(actuallySetAuthState(false));
+        dispatch(setAuthState(false));
       } else {
         requestFailed(err);
       }
@@ -70,19 +72,24 @@ export function logout() {
   }
 }
 
+/**
+ * Registers a user
+ * @param  {string} username The username of the new user
+ * @param  {string} password The password of the new user
+ */
 export function register(username, password) {
   return (dispatch) => {
     dispatch(sendingRequest(true));
     auth.register(username, password, (success, err) => {
       dispatch(sendingRequest(false));
-      dispatch(actuallySetAuthState(success));
+      dispatch(setAuthState(success));
 
       if (success) {
         history.replaceState(null, '/');
-        changeForm({
+        dispatch(changeForm({
           username: "",
           password: ""
-        });
+        }));
       } else {
         requestFailed(err);
       }
@@ -90,20 +97,41 @@ export function register(username, password) {
   }
 }
 
-function actuallySetAuthState(newState) {
+/**
+ * Sets the authentication state of the application
+ * @param {boolean} newState True means a user is logged in, false means no user is logged in
+ */
+export function setAuthState(newState) {
   return { type: SET_AUTH, newState };
 }
 
+/**
+ * Sets the form state
+ * @param  {object} newState          The new state of the form
+ * @param  {string} newState.username The new text of the username input field of the form
+ * @param  {string} newState.password The new text of the password input field of the form
+ * @return {object}                   Formatted action for the reducer to handle
+ */
 export function changeForm(newState) {
   return { type: CHANGE_FORM, newState };
 }
 
+/**
+ * Sets the requestSending state, which displays a loading indicator during requests
+ * @param  {boolean} sending The new state the app should have
+ * @return {object}          Formatted action for the reducer to handle
+ */
 export function sendingRequest(sending) {
   return { type: SENDING_REQUEST, sending };
 }
 
 let lastErrType = "";
 
+/**
+ * Called when a request failes
+ * @param  {object} err An object containing information about the error
+ * @param  {string} err.type The js-form__err + err.type class will be set on the form
+ */
 function requestFailed(err) {
   // Remove the class of the last error so there can only ever be one
   const form = document.querySelector('.form-page__form-wrapper');
