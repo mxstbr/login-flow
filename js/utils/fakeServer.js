@@ -1,6 +1,7 @@
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 const salt = bcrypt.genSaltSync(10);
 let users;
+let localStorage = global.window.localStorage;
 
 /**
  * Fake remote server, using bcrypt and localStorage to persist data across page
