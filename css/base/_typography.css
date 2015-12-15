@@ -26,3 +26,10 @@ a {
 a:hover {
   color: $brand-color;
 }
+
+code {
+  font-size: 0.75em;
+  background-color: $very-light-grey;
+  padding: 0.125em 0.5em;
+  border-radius: 1px;
+}
