@@ -12,8 +12,6 @@ This application demonstrates what a React.js based register/login workflow migh
 
 - [**PostCSS**](https://github.com/postcss/postcss) is like Sass, but modular and capable of much more. PostCSS is, in essence, just a wrapper for plugins which exposes an easy to use, but very powerful API. While it is possible to [replicate Sass features](https://github.com/jonathantneal/precss) with PostCSS, PostCSS has an [ecosystem of amazing plugins](http://postcss.parts) with funcionalities Sass cannot even dream about having.
 
-- **Unit tests** should be an important part of every web application developers toolchain. [Mocha](https://github.com/mochajs/mocha) checks your application is working exactly how it should without you lifting a single finger. Congratulations, you just won a First Class ticket to world domaination, fasten your seat belt please!
-
 - [**react-router**](https://github.com/rackt/react-router) is used for routing in this boilerplate. Using the new, and currently unreleased, `1.0` version, react-router makes routing really easy to do and takes care of a lot of the work. Since the version is not officially out yet, the [documentation](https://github.com/rackt/react-router/blob/master/doc/00%20Guides/0%20Overview.md) is not fully finished, but by far finished enough to work for most needs.
 
 - [**ServiceWorker**](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) and [**AppCache**](http://www.html5rocks.com/en/tutorials/appcache/beginner/) make it possible to use your application offline. As soon as the website has been opened once, it is cached and available without a network connection. [**`manifest.json`**](https://developer.chrome.com/multidevice/android/installtohomescreen) is specifically for Chrome on Android. Users can add the website to the homescreen and use it like a native app!
@@ -85,6 +83,11 @@ The folder structure of the JS files reflects how [Redux](https://github.com/gae
 * `reducers`: Reducers manage the state of an app, basically a simplified implementation of Stores in Flux. For an introduction to reducers, watch [this talk](https://www.youtube.com/watch?v=xsSnOQynTHs) by @gaearon.
 
 * `utils`: Utility files.
+
+### Authentication
+
+Authentication happens in `js/utils/auth.js`, using `js/utils/fakeRequest.js` and `js/utils/fakeServer.js`. `fakeRequest.js` is a fake XMLHttpRequest wrapper with a similar syntax to `request.js`. `fakeServer.js` gets the fake HTTP requests and stores the current users in localStorage, with the passwords encrypted using `bcrypt`.
+To change it to real authentication, you'd only have to import `request.js` instead of `fakeRequest.js` and have a server running somewhere.
 
 ## Opinionated features
 

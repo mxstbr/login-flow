@@ -26,11 +26,9 @@
     "eslint": "^1.4.1",
     "eslint-config-airbnb": "1.0.0",
     "eslint-plugin-react": "^3.3.2",
-    "expect": "^1.10.0",
     "file-loader": "^0.8.4",
     "html-webpack-plugin": "^1.6.1",
     "json-loader": "^0.5.2",
-    "mocha": "^2.3.2",
     "object.assign": "^4.0.1",
     "postcss-focus": "^1.0.0",
     "postcss-import": "^7.0.0",
@@ -48,9 +46,8 @@
     "url": "git://github.com/mxstbr/react-boilerplate.git"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel/register --recursive",
     "start": "NODE_ENV=development && node server.js",
-    "build": "npm run test && NODE_ENV=production && webpack --config webpack.prod.config.js --progress --colors -p"
+    "build": "NODE_ENV=production && webpack --config webpack.prod.config.js --progress --colors -p"
   },
   "author": "Max Stoiber",
   "license": "MIT"
