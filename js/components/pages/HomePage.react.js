@@ -17,12 +17,12 @@ class HomePage extends Component {
     const { loggedIn } = this.props.data;
 
     return (
-			<div className="wrapper">
+			<article>
 				{/* Change the copy based on the authentication status */}
 				{loggedIn ? (
 					<h1>Welcome, you are logged in!</h1>
 				) : (
-					<article>
+					<div>
 						<section className="text-section">
 							<h1>Login Flow</h1>
 							<p>This application demonstrates what a React.js based register/login workflow might look like on the Frontend. I used <a href="https://github.com/mxstbr/react-boilerplate">react-boilerplate</a> as a starting point — the app thus uses Redux, PostCSS, react-router, ServiceWorker, AppCache, bcrypt and lots more.</p>
@@ -55,9 +55,9 @@ class HomePage extends Component {
 							</p>
 							<p>To change it to real authentication, you’d only have to import <code>request.js</code> instead of <code>fakeRequest.js</code> and have a server running somewhere.</p>
 						</section>
-					</article>
+					</div>
 				)}
-			</div>
+			</article>
 		);
   }
 }
