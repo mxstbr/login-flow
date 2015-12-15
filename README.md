@@ -10,25 +10,21 @@ This application demonstrates what a React.js based register/login workflow migh
 
 - [**Redux**](https://github.com/gaearon/redux) is a much better implementation of a flux–like, unidirectional data flow. Redux makes actions composable, reduces the boilerplate code and makes hot–reloading possible in the first place. For a good overview of redux check out the talk linked above or the [official documentation](https://gaearon.github.io/redux/)!
 
-- [**PostCSS**](https://github.com/postcss/postcss) is like Sass, but modular and capable of much more. PostCSS is, in essence, just a wrapper for plugins which exposes an easy to use, but very powerful API. While it is possible to [replicate Sass features](https://github.com/jonathantneal/precss) with PostCSS, PostCSS has an [ecosystem of amazing plugins](http://postcss.parts) with funcionalities Sass cannot even dream about having.
+- [**PostCSS**](https://github.com/postcss/postcss) is like Sass, but modular and capable of much more. PostCSS is, in essence, just a wrapper for plugins which exposes an easy to use, but very powerful API. While it is possible to [replicate Sass features](https://github.com/jonathantneal/precss) with PostCSS, PostCSS has an [ecosystem of amazing plugins](http://postcss.parts) with functionalities Sass cannot even dream about having.
 
-- [**react-router**](https://github.com/rackt/react-router) is used for routing in this boilerplate. Using the new, and currently unreleased, `1.0` version, react-router makes routing really easy to do and takes care of a lot of the work. Since the version is not officially out yet, the [documentation](https://github.com/rackt/react-router/blob/master/doc/00%20Guides/0%20Overview.md) is not fully finished, but by far finished enough to work for most needs.
+- [**react-router**](https://github.com/rackt/react-router) is used for routing in this application. react-router makes routing really easy to do and takes care of a lot of the work.
 
-- [**ServiceWorker**](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) and [**AppCache**](http://www.html5rocks.com/en/tutorials/appcache/beginner/) make it possible to use your application offline. As soon as the website has been opened once, it is cached and available without a network connection. [**`manifest.json`**](https://developer.chrome.com/multidevice/android/installtohomescreen) is specifically for Chrome on Android. Users can add the website to the homescreen and use it like a native app!
+- [**ServiceWorker**](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) and [**AppCache**](http://www.html5rocks.com/en/tutorials/appcache/beginner/) make it possible to use the application offline. As soon as the website has been opened once, it is cached and available without a network connection. [**`manifest.json`**](https://developer.chrome.com/multidevice/android/installtohomescreen) is specifically for Chrome on Android. Users can add the website to the homescreen and use it like a native app!
 
 ## Getting started
 
-1. Clone this repo using `git clone git@github.com:mxstbr/react-boilerplate`.
+1. Clone this repo using `git clone git@github.com:mxstbr/login-flow`.
 
-2. Delete the existing git repository by running `rm -rf .git`.
+2. Run `npm install` to install the dependencies.
 
-3. Initialize a new git repository with `git init`, `git add .` and `git commit -m "Initial commit"`.
+3. Run `npm start` to start the local web server.
 
-4. Run `npm install` to install the dependencies.
-
-5. Run `npm start` to start the local web server.
-
-6. Go to `http://localhost:3000` and you should see the app running!
+4. Go to `http://localhost:3000` and you should see the app running!
 
 ## CSS
 
@@ -76,11 +72,11 @@ The folder structure of the JS files reflects how [Redux](https://github.com/gae
 
 * `actions`: Actions get dispatched with this/these utility module(s)
 
-* `components`: The main JS folder. All your React components should be in this folder, for big projects they might be grouped into seperate subfolders. E.g. a navigation component `Nav.react.js`
+* `components`: The main JS folder. All the React components are in this folder, with pages (routes) saved in the `pages` subfolder. E.g. a navigation component `Nav.react.js`
 
-* `constants`: Action constants need to be defined in this/these utility module(s)
+* `constants`: Action constants are defined in this/these utility module(s)
 
-* `reducers`: Reducers manage the state of an app, basically a simplified implementation of Stores in Flux. For an introduction to reducers, watch [this talk](https://www.youtube.com/watch?v=xsSnOQynTHs) by @gaearon.
+* `reducers`: Reducers manage the state of this app, basically a simplified implementation of Stores in Flux. For an introduction to reducers, watch [this talk](https://www.youtube.com/watch?v=xsSnOQynTHs) by @gaearon.
 
 * `utils`: Utility files.
 
