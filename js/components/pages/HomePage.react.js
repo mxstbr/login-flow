@@ -49,6 +49,12 @@ class HomePage extends Component {
 								</li>
 							</ul>
 						</section>
+						<section className="text-section">
+							<h2>Authentication</h2>
+							<p>Authentication happens in <code>js/utils/auth.js</code>, using <code>fakeRequest.js</code> and <code>fakeServer.js</code>. <code>fakeRequest</code> is a fake XMLHttpRequest wrapper with a similar syntax to <code>request.js</code>. <code>fakeServer</code> responds to the fake HTTP requests and pretends to be a real server, storing the current users in localStorage with the passwords encrypted using <code>bcrypt</code>.
+							</p>
+							<p>To change it to real authentication, you’d only have to import <code>request.js</code> instead of <code>fakeRequest.js</code> and have a server running somewhere.</p>
+						</section>
 					</article>
 				)}
 			</div>
