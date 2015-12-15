@@ -89,6 +89,7 @@
   padding: 0.5em 1em;
   font-size: 0.8em;
   font-family: $text-font-stack;
+  user-select: none;
 }
 
 .js-form__err .form__error-wrapper {

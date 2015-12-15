@@ -19,6 +19,7 @@
 .form-page__form-heading {
   text-align: center;
   font-size: 1em;
+  user-select: none;
 }
 
 .form-page__form-header {
