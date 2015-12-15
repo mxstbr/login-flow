@@ -13,3 +13,7 @@
   color: white;
   background-color: $brand-color;
 }
+
+.btn + .btn {
+  margin-left: 1em;
+}

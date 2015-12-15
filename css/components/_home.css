@@ -9,7 +9,6 @@
 	height: 100%;
 }
 
-.home__wrapper h1,
-.home__wrapper h2 {
-	text-align: center;
+.text-section {
+	margin: 3em auto;
 }

@@ -13,3 +13,16 @@ p {
   font-family: Georgia, sans-serif;
   line-height: 1.5em;
 }
+
+ul {
+  padding-left: 1.75em;
+}
+
+a {
+  text-decoration: none;
+  color: $dark-brand-color;
+}
+
+a:hover {
+  color: $brand-color;
+}
