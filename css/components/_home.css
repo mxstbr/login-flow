@@ -1,8 +1,11 @@
+$wrapper-padding: 16px;
+
 .wrapper {
-	max-width: $max-width;
+	max-width: calc($max-width + $wrapper-padding * 2);
 	margin: 0 auto;
 	display: flex;
 	height: 100%;
+	padding: 0 $wrapper-padding;
 }
 
 #app {
