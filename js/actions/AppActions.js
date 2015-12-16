@@ -34,8 +34,9 @@ import history from '../utils/history';
  */
 export function login(username, password) {
   return (dispatch) => {
-    // Show the loading indicator
+    // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
+    removeLastFormError();
     // Use auth.js to fake a request
     auth.login(username, password, (success, err) => {
       // When the request is finished, hide the loading indicator
@@ -79,12 +80,16 @@ export function logout() {
  */
 export function register(username, password) {
   return (dispatch) => {
+    // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
+    removeLastFormError();
+    // Use auth.js to fake a request
     auth.register(username, password, (success, err) => {
+      // When the request is finished, hide the loading indicator
       dispatch(sendingRequest(false));
       dispatch(setAuthState(success));
-
       if (success) {
+        // If the login worked, forward the user to the homepage and clear the form
         history.replaceState(null, '/');
         dispatch(changeForm({
           username: "",
@@ -134,8 +139,8 @@ let lastErrType = "";
  */
 function requestFailed(err) {
   // Remove the class of the last error so there can only ever be one
+  removeLastFormError();
   const form = document.querySelector('.form-page__form-wrapper');
-  form.classList.remove('js-form__err--' + lastErrType);
   // And add the respective classes
   form.classList.add('js-form__err');
   form.classList.add('js-form__err-animation');
@@ -146,4 +151,12 @@ function requestFailed(err) {
   setTimeout(() => {
     form.classList.remove('js-form__err-animation');
   }, 150);
+}
+
+/**
+ * Removes the last error from the form
+ */
+function removeLastFormError() {
+  const form = document.querySelector('.form-page__form-wrapper');
+  form.classList.remove('js-form__err--' + lastErrType);
 }
