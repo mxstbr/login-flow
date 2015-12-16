@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 const salt = bcrypt.genSaltSync(10);
 let users;
+// webpack doesn't like localStorage otherwise
 let localStorage = global.window.localStorage;
 
 /**
