@@ -1,8 +1,22 @@
 <ifModule mod_rewrite.c>
+  # Honestly no clue what those two do, have to look it up
   Options +FollowSymLinks
   IndexIgnore */*
+  # Enable rewriting
   RewriteEngine On
+  # If its not HTTPS
+  # RewriteCond %{HTTPS} off
+  # Comment out the line above, and uncomment the line below if you're using CloudFlare/... for SSL
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  # Redirect to the same URL with https://, ignoring all further rules if this one matched
+  RewriteRule ^(.*) https://%{HTTP_HOST}/$1 [R,L]
+  # If we get to here, it means we are on https:// already
+  # If the file with the specified name in the browser doesn't exist
   RewriteCond %{REQUEST_FILENAME} !-f
+  # and the directory with the specified name in the browser doesn't exist
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule (.*) index.html
+  # and we are not opening index.html (otherwise we get a redirect loop)
+  RewriteCond %{REQUEST_FILENAME} !\/$
+  # Rewrite all subdomains to the root index.html
+  RewriteRule ^(.*) /
 </ifModule>
