@@ -2,6 +2,7 @@
 
 $text-font-stack: 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace;
+$serif-font-stack: Georgia, Times, 'Times New Roman', serif;
 
 $brand-color: #6CC0E5;
 $dark-brand-color: #41ADDD;

@@ -10,7 +10,7 @@ body {
 }
 
 p {
-  font-family: Georgia, sans-serif;
+  font-family: $serif-font-stack;
   line-height: 1.5em;
 }
 
