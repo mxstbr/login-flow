@@ -20,14 +20,14 @@ class Nav extends Component {
       ) : (
         <div>
           <Link to="/register" className="btn btn--login btn--nav">Register</Link>
-          <Link to="/login" className="btn btn--login btn--nav">Log In</Link>
+          <Link to="/login" className="btn btn--login btn--nav">Log&nbsp;In</Link>
         </div>
       );
 
     return(
       <div className="nav">
         <div className="nav__wrapper">
-          <Link to="/" className="nav__logo-wrapper"><h1 className="nav__logo">Login Flow</h1></Link>
+          <Link to="/" className="nav__logo-wrapper"><h1 className="nav__logo">Login&nbsp;Flow</h1></Link>
           { navButtons }
         </div>
       </div>
