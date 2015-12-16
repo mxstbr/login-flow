@@ -38,11 +38,12 @@ import history from './utils/history';
 
 // When Open Sans is loaded, add the js-open-sans-loaded class to the body
 // which swaps out the fonts
-const openSansObserver = new FontFaceObserver('Open Sans', {});
-openSansObserver.check().then((err) => {
-  document.body.classList.remove('js-open-sans-loaded');
-}, () => {
+const openSansObserver = new FontFaceObserver('Open Sans');
+
+openSansObserver.check().then(() => {
   document.body.classList.add('js-open-sans-loaded');
+}, (err) => {
+  document.body.classList.remove('js-open-sans-loaded');
 });
 
 // Import the components used as pages
