@@ -84,7 +84,7 @@ The folder structure of the JS files reflects how [Redux](https://github.com/gae
 
 ### Authentication
 
-Authentication happens in `js/utils/auth.js`, using `fakeRequest.js` and `fakeServer.js`. `fakeRequest` is a fake XMLHttpRequest wrapper with a similar syntax to `request.js`. `fakeServer` responds to the fake HTTP requests and pretends to be a real server, storing the current users in localStorage with the passwords encrypted using `bcrypt`.
+Authentication happens in `js/utils/auth.js`, using `fakeRequest.js` and `fakeServer.js`. `fakeRequest` is a fake XMLHttpRequest wrapper with a similar syntax to `request.js` which simulates network latency. `fakeServer` responds to the fake HTTP requests and pretends to be a real server, storing the current users in localStorage with the passwords encrypted using `bcrypt`.
 To change it to real authentication, you'd only have to import `request.js` instead of `fakeRequest.js` and have a server running somewhere.
 
 ## Opinionated features
