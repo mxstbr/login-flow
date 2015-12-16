@@ -27,8 +27,12 @@ class HomePage extends Component {
 							<h1>Weclome to Login Flow!</h1>
 						)}
 						<p>This application demonstrates what a React.js based register/login workflow might look like on the Frontend. I used <a href="https://github.com/mxstbr/react-boilerplate">react-boilerplate</a> as a starting point — the app thus uses Redux, PostCSS, react-router, ServiceWorker, AppCache, bcrypt and lots more.</p>
-						<Link to="/login" className="btn btn--login">Log In</Link>
-						<Link to="/register" className="btn btn--register">Register</Link>
+						{loggedIn ? null : (
+							<div>
+								<Link to="/login" className="btn btn--login">Log In</Link>
+								<Link to="/register" className="btn btn--register">Register</Link>
+							</div>
+						)}
 					</section>
 					<section className="text-section">
 						<h2>Features</h2>
