@@ -24,7 +24,7 @@ class HomePage extends Component {
 						{loggedIn ? (
 							<h1>Welcome to Login Flow, you are logged in!</h1>
 						) : (
-							<h1>Weclome to Login Flow!</h1>
+							<h1>Welcome to Login Flow!</h1>
 						)}
 						<p>This application demonstrates what a React.js based register/login workflow might look like on the Frontend. I used <a href="https://github.com/mxstbr/react-boilerplate">react-boilerplate</a> as a starting point — the app thus uses Redux, PostCSS, react-router, ServiceWorker, AppCache, bcrypt and lots more.</p>
 						{loggedIn ? null : (
