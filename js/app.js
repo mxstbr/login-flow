@@ -12,6 +12,8 @@ import 'file?name=[name].[ext]!../serviceworker.js';
 import 'file?name=[name].[ext]!../serviceworker-cache-polyfill.js';
 import 'file?name=[name].[ext]!../manifest.json';
 import 'file?name=[name].[ext]!../.htaccess';
+import 'file?name=[name].[ext]!../favicon.ico';
+import 'file?name=[name].[ext]!../favicon.png';
 
 // Check for ServiceWorker support before trying to install it
 if ('serviceWorker' in navigator) {
