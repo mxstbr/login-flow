@@ -35,7 +35,9 @@ module.exports = function(options) {
           minifyURLs: true
         }
       }),
-      new AppCachePlugin()
+      new AppCachePlugin({
+        exclude: ['.htaccess']
+      })
     ];
 
   // If app is in development
