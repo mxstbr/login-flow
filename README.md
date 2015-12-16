@@ -2,6 +2,8 @@
 
 This application demonstrates what a React.js based register/login workflow might look like on the Frontend. I used my [react-boilerplate](https://github.com/mxstbr/react-boilerplate) as a starting point — the app thus uses  Redux, PostCSS, react-router, ServiceWorker, AppCache, bcrypt and lots more.
 
+The default username is `AzureDiamond` and the default password is `hunter2`, but feel free to register new users! The registered users are saved to localStorage, so they'll persist across page reloads.
+
 -----
 
 ## Features

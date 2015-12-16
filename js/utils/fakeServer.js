@@ -17,8 +17,9 @@ var server = {
     // Get the previous users from localStorage if they exist, otherwise
     // populates the localStorage
     if (localStorage.users === undefined) {
+      // Set default user
       users = {
-        "max": bcrypt.hashSync("password1", salt)
+        "AzureDiamond": bcrypt.hashSync("hunter2", salt)
       };
       localStorage.users = JSON.stringify(users);
     } else {
