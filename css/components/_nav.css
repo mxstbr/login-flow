@@ -41,3 +41,17 @@
 .btn--nav + .btn--nav {
   margin-left: 1em;
 }
+
+@media screen and (max-width: 400px) {
+  .nav__wrapper {
+    justify-content: none;
+  }
+
+  .nav__logo-wrapper {
+    margin: 0 auto;
+  }
+
+  .btn--nav {
+    display: none;
+  }
+}
