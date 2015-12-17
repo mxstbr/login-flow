@@ -1,3 +1,11 @@
+/*
+ * HomePage
+ *
+ * The Dashboard is only visible to logged in users
+ * Route: /dashboard
+ *
+ */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
