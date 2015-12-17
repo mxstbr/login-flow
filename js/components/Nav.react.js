@@ -47,7 +47,8 @@ class Nav extends Component {
 }
 
 Nav.propTypes = {
-  loggedIn: React.PropTypes.bool.isRequired
+  loggedIn: React.PropTypes.bool.isRequired,
+  currentlySending: React.PropTypes.bool.isRequired
 }
 
 export default Nav;

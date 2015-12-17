@@ -80,7 +80,7 @@ class LoginForm extends Component {
 
 LoginForm.propTypes = {
   onSubmit: React.PropTypes.func.isRequired,
-  btnText: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.object]).isRequired,
+  btnText: React.PropTypes.string.isRequired,
   data: React.PropTypes.object.isRequired
 }
 
