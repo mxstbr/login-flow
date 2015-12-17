@@ -43,8 +43,8 @@ export function login(username, password) {
       dispatch(sendingRequest(false));
       dispatch(setAuthState(success));
       if (success === true) {
-        // If the login worked, forward the user to the homepage and clear the form
-        history.replaceState(null, '/');
+        // If the login worked, forward the user to the dashboard and clear the form
+        history.replaceState(null, '/dashboard');
         dispatch(changeForm({
           username: "",
           password: ""
@@ -66,6 +66,7 @@ export function logout() {
       if (success === true) {
         dispatch(sendingRequest(false));
         dispatch(setAuthState(false));
+        history.replaceState(null, '/');
       } else {
         requestFailed(err);
       }
@@ -89,8 +90,8 @@ export function register(username, password) {
       dispatch(sendingRequest(false));
       dispatch(setAuthState(success));
       if (success) {
-        // If the login worked, forward the user to the homepage and clear the form
-        history.replaceState(null, '/');
+        // If the register worked, forward the user to the homepage and clear the form
+        history.replaceState(null, '/dashboard');
         dispatch(changeForm({
           username: "",
           password: ""
