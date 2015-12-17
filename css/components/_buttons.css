@@ -18,3 +18,8 @@
 .btn + .btn {
   margin-left: 1em;
 }
+
+.btn--loading {
+  color: white;
+  background-color: $brand-color;
+}

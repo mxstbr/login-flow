@@ -49,7 +49,7 @@
 }
 
 .form__submit-btn-wrapper {
-  padding: 16px;
+  padding: 2em 1em;
   width: 100%;
   background-color: #fff;
   display: flex;
@@ -65,7 +65,7 @@
   background-color: $brand-color;
   color: white;
   display: block;
-  margin: 1em auto;
+  margin: 0 auto;
   position: relative;
 }
 

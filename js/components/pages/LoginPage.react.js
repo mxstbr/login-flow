@@ -37,7 +37,7 @@ export default class LoginPage extends Component {
 					</div>
 					{/* While the form is sending, show the loading indicator,
 						otherwise show "Log in" on the submit button */}
-		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={::this._login} btnText={currentlySending ? <LoadingIndicator /> : "Login" }/>
+		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={::this._login} btnText={"Login"} currentlySending={currentlySending}/>
 				</div>
 			</div>
 		);

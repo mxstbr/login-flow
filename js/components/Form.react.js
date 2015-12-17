@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { changeForm } from '../actions/AppActions';
 import { History } from 'react-router';
+import LoadingButton from './LoadingButton.react';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
 const assign = Object.assign || require('object.assign');
@@ -32,7 +33,11 @@ class LoginForm extends Component {
           <label className="form__field-label" htmlFor="password">Password</label>
         </div>
         <div className="form__submit-btn-wrapper">
-          <button className="form__submit-btn" type="submit">{this.props.btnText}</button>
+          {this.props.currentlySending ? (
+            <LoadingButton />
+          ) : (
+            <button className="form__submit-btn" type="submit">{this.props.btnText}</button>
+          )}
         </div>
       </form>
     );

@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { logout } from '../actions/AppActions';
-import LoadingIndicator from './LoadingIndicator.react';
+import LoadingButton from './LoadingButton.react';
 
 class Nav extends Component {
   render() {
@@ -18,7 +18,11 @@ class Nav extends Component {
     const navButtons = this.props.loggedIn ? (
         <div>
           <Link to="/dashboard" className="btn btn--dash btn--nav">Dashboard</Link>
-          <a href="#" className="btn btn--login btn--nav" onClick={::this._logout}>{this.props.currentlySending ? <LoadingIndicator /> : "Logout"}</a>
+          {this.props.currentlySending ? (
+            <LoadingButton className="btn--nav" />
+          ) : (
+            <a href="#" className="btn btn--login btn--nav" onClick={::this._logout}>Logout</a>
+          )}
         </div>
       ) : (
         <div>
