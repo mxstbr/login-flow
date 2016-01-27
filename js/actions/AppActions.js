@@ -44,7 +44,7 @@ export function login(username, password) {
       dispatch(setAuthState(success));
       if (success === true) {
         // If the login worked, forward the user to the dashboard and clear the form
-        history.replaceState(null, '/dashboard');
+        forwardTo('/dashboard');
         dispatch(changeForm({
           username: "",
           password: ""
@@ -91,7 +91,7 @@ export function register(username, password) {
       dispatch(setAuthState(success));
       if (success) {
         // If the register worked, forward the user to the homepage and clear the form
-        history.replaceState(null, '/dashboard');
+        forwardTo('/dashboard');
         dispatch(changeForm({
           username: "",
           password: ""
@@ -129,6 +129,15 @@ export function changeForm(newState) {
  */
 export function sendingRequest(sending) {
   return { type: SENDING_REQUEST, sending };
+}
+
+/**
+ * Forwards the user
+ * @param {string} location The route the user should be forwarded to
+ */
+function forwardTo(location) {
+  console.log('forwardTo(' + location + ')');
+  history.pushState(location);
 }
 
 let lastErrType = "";
