@@ -6,6 +6,12 @@ The default username is `AzureDiamond` and the default password is `hunter2`, bu
 
 -----
 
+## Authentication
+
+Authentication happens in `js/utils/auth.js`, using `fakeRequest.js` and `fakeServer.js`. `fakeRequest` is a fake XMLHttpRequest wrapper with a similar syntax to `request.js` which simulates network latency. `fakeServer` responds to the fake HTTP requests and pretends to be a real server, storing the current users in localStorage with the passwords encrypted using `bcrypt`.
+
+To change it to real authentication, you’d only have to import `request.js` instead of `fakeRequest.js` and have a server running somewhere.
+
 ## Features
 
 - Using [**react-hot-loader**](https://github.com/gaearon/react-hot-loader), your changes in the CSS and JS get reflected in the app instantly without refreshing the page. That means that the **current application state persists** even when you change something in the underlying code! For a very good explanation and demo watch Dan Abramov himself [talking about it at react-europe](https://www.youtube.com/watch?v=xsSnOQynTHs).
