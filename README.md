@@ -115,7 +115,7 @@ If you simply use web fonts in your project, the page will stay blank until thes
 
 Using a `ServiceWorker` and the `AppCache`, the application is cached for offline usage. To cache a file, add it to the `urlsToCache` variable in the `serviceworker.js` file.
 
-Once you run locally you will need to terminate the serviceworker when running another app in the same localhost port, to terminate the serviceworker visit `chrome://inspect/#service-workers` then choose your domain and terminate the worker.
+Once you run locally you will need to terminate the serviceworker when running another app in the same localhost port, to terminate the serviceworker visit `chrome://inspect/#service-workers` find the path to your localhost and terminate the worker. You might need to stop the worker if terminating wasn't enough `chrome://serviceworker-internals` then find the path to your localhost and stop/unregister.
 
 ### Add To Homescreen
 
