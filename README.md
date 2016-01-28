@@ -52,7 +52,7 @@ The boilerplate uses PostCSS, and includes a few plugins by default:
 
 * `autoprefixer-core`: Prefixes your CSS automatically, supporting the last two versions of all major browsers and IE 8 and up.
 
-* `cssnano`: Optimizes your CSS file. For a full list of optimizations check [the offical website](http://cssnano.co/optimisations/).
+* `cssnano`: Optimizes your CSS file. For a full list of optimizations check [the official website](http://cssnano.co/optimisations/).
 
 * `postcss-reporter`: Makes warnings by the above plugins visible in the console.
 
