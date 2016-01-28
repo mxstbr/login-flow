@@ -17,7 +17,7 @@ var server = {
   init() {
     // Get the previous users from localStorage if they exist, otherwise
     // populates the localStorage
-    if (localStorage.users === undefined) {
+    if (localStorage.users === undefined || !localStorage.encrypted) {
       // Set default user
       const AzureDiamond = "AzureDiamond";
       const AzureDiamondSalt = genSalt(AzureDiamond);
@@ -26,6 +26,7 @@ var server = {
         [AzureDiamond]: bcrypt.hashSync(AzureDiamondPass, salt)
       };
       localStorage.users = JSON.stringify(users);
+      localStorage.encrypted = true;
     } else {
       users = JSON.parse(localStorage.users);
     }
