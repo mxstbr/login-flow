@@ -25,7 +25,7 @@
 
 import { SET_AUTH, CHANGE_FORM, SENDING_REQUEST } from '../constants/AppConstants';
 import auth from '../utils/auth';
-import history from '../utils/history';
+import { browserHistory } from 'react-router';
 
 /**
  * Logs an user in
@@ -66,7 +66,7 @@ export function logout() {
       if (success === true) {
         dispatch(sendingRequest(false));
         dispatch(setAuthState(false));
-        history.replaceState(null, '/');
+        browserHistory.replace(null, '/');
       } else {
         requestFailed(err);
       }
@@ -137,7 +137,7 @@ export function sendingRequest(sending) {
  */
 function forwardTo(location) {
   console.log('forwardTo(' + location + ')');
-  history.pushState(location);
+  browserHistory.pushState(location);
 }
 
 let lastErrType = "";

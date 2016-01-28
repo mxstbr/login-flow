@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var AppCachePlugin = require('appcache-webpack-plugin');
 
 module.exports = function(options) {
-  var entry, jsLoaders, plugins, cssLoaders;
+  var entry, jsLoaders, plugins, cssLoaders, devtool;
 
   // If production is true
   if (options.prod) {
@@ -42,6 +42,7 @@ module.exports = function(options) {
 
   // If app is in development
   } else {
+    devtool = 'cheap-eval-source-map';
     // Entry
     entry = [
       "webpack-dev-server/client?http://localhost:3000", // Needed for hot reloading
@@ -57,6 +58,7 @@ module.exports = function(options) {
   }
 
   return {
+    devtool: devtool,
     entry: entry,
     output: { // Compile into js/build.js
       path: path.resolve(__dirname, 'build'),
