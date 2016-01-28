@@ -10,17 +10,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
-  componentWillMount() {
-		// If the user is already logged in, forward them to the homepage
-		if (this.props.data.loggedIn === false) {
-			if (this.props.location.state && this.props.location.state.nextPathname) {
-				this.props.history.replaceState(null, this.props.location.state.nextPathname)
-			} else {
-				this.props.history.replaceState(null, '/')
-			}
-		}
-	}
-
   render() {
     return (
       <article>
