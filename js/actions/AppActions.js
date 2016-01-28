@@ -23,8 +23,10 @@
  *    created in the second step
  */
 
+import bcrypt from 'bcryptjs';
 import { SET_AUTH, CHANGE_FORM, SENDING_REQUEST } from '../constants/AppConstants';
 import auth from '../utils/auth';
+import genSalt from '../utils/salt';
 import history from '../utils/history';
 
 /**
@@ -37,21 +39,33 @@ export function login(username, password) {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
     removeLastFormError();
-    // Use auth.js to fake a request
-    auth.login(username, password, (success, err) => {
-      // When the request is finished, hide the loading indicator
-      dispatch(sendingRequest(false));
-      dispatch(setAuthState(success));
-      if (success === true) {
-        // If the login worked, forward the user to the dashboard and clear the form
-        forwardTo('/dashboard');
-        dispatch(changeForm({
-          username: "",
-          password: ""
-        }));
-      } else {
-        requestFailed(err);
+    // Generate salt for password encryption
+    const salt = genSalt(username);
+    // Encrypt password
+    bcrypt.hash(password, salt, (err, hash) => {
+      // Something wrong while hashing
+      if (err) {
+        requestFailed({
+          type: 'failed'
+        });
+        return;
       }
+      // Use auth.js to fake a request
+      auth.login(username, hash, (success, err) => {
+        // When the request is finished, hide the loading indicator
+        dispatch(sendingRequest(false));
+        dispatch(setAuthState(success));
+        if (success === true) {
+          // If the login worked, forward the user to the dashboard and clear the form
+          forwardTo('/dashboard');
+          dispatch(changeForm({
+            username: "",
+            password: ""
+          }));
+        } else {
+          requestFailed(err);
+        }
+      });
     });
   }
 }
@@ -84,21 +98,33 @@ export function register(username, password) {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
     removeLastFormError();
-    // Use auth.js to fake a request
-    auth.register(username, password, (success, err) => {
-      // When the request is finished, hide the loading indicator
-      dispatch(sendingRequest(false));
-      dispatch(setAuthState(success));
-      if (success) {
-        // If the register worked, forward the user to the homepage and clear the form
-        forwardTo('/dashboard');
-        dispatch(changeForm({
-          username: "",
-          password: ""
-        }));
-      } else {
-        requestFailed(err);
+    // Generate salt for password encryption
+    const salt = genSalt(username);
+    // Encrypt password
+    bcrypt.hash(password, salt, (err, hash) => {
+      // Something wrong while hashing
+      if (err) {
+        requestFailed({
+          type: 'failed'
+        });
+        return;
       }
+      // Use auth.js to fake a request
+      auth.register(username, hash, (success, err) => {
+        // When the request is finished, hide the loading indicator
+        dispatch(sendingRequest(false));
+        dispatch(setAuthState(success));
+        if (success) {
+          // If the register worked, forward the user to the homepage and clear the form
+          forwardTo('/dashboard');
+          dispatch(changeForm({
+            username: "",
+            password: ""
+          }));
+        } else {
+          requestFailed(err);
+        }
+      });
     });
   }
 }

@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import genSalt from './salt';
 const salt = bcrypt.genSaltSync(10);
 let users;
 // webpack doesn't like localStorage otherwise
@@ -18,8 +19,11 @@ var server = {
     // populates the localStorage
     if (localStorage.users === undefined) {
       // Set default user
+      const AzureDiamond = "AzureDiamond";
+      const AzureDiamondSalt = genSalt(AzureDiamond);
+      const AzureDiamondPass = bcrypt.hashSync("hunter2", AzureDiamondSalt);
       users = {
-        "AzureDiamond": bcrypt.hashSync("hunter2", salt)
+        [AzureDiamond]: bcrypt.hashSync(AzureDiamondPass, salt)
       };
       localStorage.users = JSON.stringify(users);
     } else {
