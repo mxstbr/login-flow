@@ -115,6 +115,8 @@ If you simply use web fonts in your project, the page will stay blank until thes
 
 Using a `ServiceWorker` and the `AppCache`, the application is cached for offline usage. To cache a file, add it to the `urlsToCache` variable in the `serviceworker.js` file.
 
+Once you run locally you will need to terminate the serviceworker when running another app in the same localhost port, to terminate the serviceworker visit `chrome://inspect/#service-workers` then choose your domain and terminate the worker.
+
 ### Add To Homescreen
 
 On Chrome for Android (soon hopefully more browsers), users can add a webpage to the homescreen. Combined with offline caching, this means the app can be used exactly like a native application.

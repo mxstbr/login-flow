@@ -14,21 +14,9 @@ import { login } from '../../actions/AppActions';
 import LoadingIndicator from '../LoadingIndicator.react';
 
 export default class LoginPage extends Component {
-	componentWillMount() {
-		// If the user is already logged in, forward them to the homepage
-		if (this.props.data.loggedIn === true) {
-			if (this.props.location.state && this.props.location.state.nextPathname) {
-				this.props.history.replaceState(null, this.props.location.state.nextPathname)
-			} else {
-				this.props.history.replaceState(null, '/')
-			}
-		}
-	}
-
 	render() {
 		const dispatch = this.props.dispatch;
-		const { loggedIn, formState, currentlySending } = this.props.data;
-
+		const { formState, currentlySending } = this.props.data;
     return (
 			<div className="form-page__wrapper">
 				<div className="form-page__form-wrapper">

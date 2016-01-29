@@ -15,7 +15,7 @@ import 'file?name=[name].[ext]!../.htaccess';
 import 'file?name=[name].[ext]!../favicon.ico';
 import 'file?name=[name].[ext]!../favicon.png';
 
-// Check for ServiceWorker support before trying to install it
+//Check for ServiceWorker support before trying to install it
 if ('serviceWorker' in navigator) {
     // Install ServiceWorker
   navigator.serviceWorker.register('/serviceworker.js').then(() => {
@@ -30,14 +30,13 @@ if ('serviceWorker' in navigator) {
 
 // Import all the third party stuff
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { homeReducer } from './reducers/reducers';
-import { Router, Route, IndexRoute } from 'react-router';
 import FontFaceObserver from 'fontfaceobserver';
-import history from './utils/history';
 
 // When Open Sans is loaded, add the js-open-sans-loaded class to the body
 // which swaps out the fonts
@@ -65,16 +64,43 @@ import '../css/main.css';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(homeReducer);
 
+
+function checkAuth(nextState, replaceState) {
+  let { loggedIn } = store.getState();
+
+  // check if the path isn't dashboard
+  // that way we can apply specific logic
+  // to display/render the path we want to
+  if (nextState.location.pathname !== '/dashboard') {
+    if (loggedIn) {
+      if (nextState.location.state && nextState.location.pathname) {
+        replaceState(null, nextState.location.pathname);
+      } else {
+        replaceState(null, '/');
+      }
+    }
+  } else {
+    // If the user is already logged in, forward them to the homepage
+    if (!loggedIn) {
+      if (nextState.location.state && nextState.location.pathname) {
+        replaceState(null, nextState.location.pathname);
+      } else {
+        replaceState(null, '/');
+      }
+    }
+  }
+}
+
 // Mostly boilerplate, except for the Routes. These are the pages you can go to,
 // which are all wrapped in the App component, which contains the navigation etc
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route component={App}>
         <Route path="/" component={HomePage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/login" component={LoginPage} onEnter={checkAuth} />
+        <Route path="/register" component={RegisterPage} onEnter={checkAuth} />
+        <Route path="/dashboard" component={Dashboard} onEnter={checkAuth} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
