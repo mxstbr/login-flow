@@ -12,13 +12,6 @@ var auth = {
    * @param  {Function} callback Called after a user was logged in on the remote server
    */
   login(username, password, callback) {
-    // If no username or password was specified, throw a field-missing error
-    if (this.anyElementsEmpty({ username, password})) {
-      callback(false, {
-        type: "field-missing"
-      });
-      return;
-    }
     // If there is a token in the localStorage, the user already is
     // authenticated
     if (this.loggedIn()) {
@@ -61,13 +54,6 @@ var auth = {
    * @param  {Function} callback Called after a user was registered on the remote server
    */
   register(username, password, callback) {
-    // If no username or password was specified, throw a field-missing error
-    if (this.anyElementsEmpty({ username, password})) {
-      callback(false, {
-        type: "field-missing"
-      });
-      return;
-    }
     // Post a fake request
     request.post('/register', { username, password }, (response) => {
       // If the user was successfully registered, log them in
@@ -78,19 +64,6 @@ var auth = {
         callback(false, response.error);
       }
     });
-  },
-  /**
-   * Checks if any elements of a JSON object are empty
-   * @param  {object} elements The object that should be checked
-   * @return {boolean}         True if there are empty elements, false if there aren't
-   */
-  anyElementsEmpty(elements) {
-    for (let element in elements) {
-      if (!elements[element]) {
-        return true;
-      }
-    }
-    return false;
   },
   onChange() {}
 }

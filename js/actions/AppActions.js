@@ -39,6 +39,14 @@ export function login(username, password) {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
     removeLastFormError();
+    // If no username or password was specified, throw a field-missing error
+    if (anyElementsEmpty({ username, password })) {
+      requestFailed({
+        type: "field-missing"
+      });
+      dispatch(sendingRequest(false));
+      return;
+    }
     // Generate salt for password encryption
     const salt = genSalt(username);
     // Encrypt password
@@ -98,6 +106,14 @@ export function register(username, password) {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
     removeLastFormError();
+    // If no username or password was specified, throw a field-missing error
+    if (anyElementsEmpty({ username, password })) {
+      requestFailed({
+        type: "field-missing"
+      });
+      dispatch(sendingRequest(false));
+      return;
+    }
     // Generate salt for password encryption
     const salt = genSalt(username);
     // Encrypt password
@@ -195,4 +211,18 @@ function requestFailed(err) {
 function removeLastFormError() {
   const form = document.querySelector('.form-page__form-wrapper');
   form.classList.remove('js-form__err--' + lastErrType);
+}
+
+/**
+ * Checks if any elements of a JSON object are empty
+ * @param  {object} elements The object that should be checked
+ * @return {boolean}         True if there are empty elements, false if there aren't
+ */
+function anyElementsEmpty(elements) {
+  for (let element in elements) {
+    if (!elements[element]) {
+      return true;
+    }
+  }
+  return false;
 }
