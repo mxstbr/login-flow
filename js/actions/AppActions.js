@@ -40,7 +40,7 @@ export function login(username, password) {
     dispatch(sendingRequest(true));
     removeLastFormError();
     // If no username or password was specified, throw a field-missing error
-    if (this.anyElementsEmpty({ username, password })) {
+    if (anyElementsEmpty({ username, password })) {
       requestFailed({
         type: "field-missing"
       });
@@ -107,7 +107,7 @@ export function register(username, password) {
     dispatch(sendingRequest(true));
     removeLastFormError();
     // If no username or password was specified, throw a field-missing error
-    if (this.anyElementsEmpty({ username, password })) {
+    if (anyElementsEmpty({ username, password })) {
       requestFailed({
         type: "field-missing"
       });
