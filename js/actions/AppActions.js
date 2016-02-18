@@ -50,6 +50,14 @@ export function login(username, password) {
         });
         return;
       }
+      // If no username or password was specified, throw a field-missing error
+      if (this.anyElementsEmpty({ username, password })) {
+        requestFailed({
+          type: "field-missing"
+        });
+        dispatch(sendingRequest(false));
+        return;
+      }
       // Use auth.js to fake a request
       auth.login(username, hash, (success, err) => {
         // When the request is finished, hide the loading indicator
@@ -107,6 +115,14 @@ export function register(username, password) {
         requestFailed({
           type: 'failed'
         });
+        return;
+      }
+      // If no username or password was specified, throw a field-missing error
+      if (this.anyElementsEmpty({ username, password })) {
+        requestFailed({
+          type: "field-missing"
+        });
+        dispatch(sendingRequest(false));
         return;
       }
       // Use auth.js to fake a request
@@ -195,4 +211,18 @@ function requestFailed(err) {
 function removeLastFormError() {
   const form = document.querySelector('.form-page__form-wrapper');
   form.classList.remove('js-form__err--' + lastErrType);
+}
+
+/**
+ * Checks if any elements of a JSON object are empty
+ * @param  {object} elements The object that should be checked
+ * @return {boolean}         True if there are empty elements, false if there aren't
+ */
+function anyElementsEmpty(elements) {
+  for (let element in elements) {
+    if (!elements[element]) {
+      return true;
+    }
+  }
+  return false;
 }
