@@ -39,6 +39,14 @@ export function login(username, password) {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
     removeLastFormError();
+    // If no username or password was specified, throw a field-missing error
+    if (this.anyElementsEmpty({ username, password })) {
+      requestFailed({
+        type: "field-missing"
+      });
+      dispatch(sendingRequest(false));
+      return;
+    }
     // Generate salt for password encryption
     const salt = genSalt(username);
     // Encrypt password
@@ -48,14 +56,6 @@ export function login(username, password) {
         requestFailed({
           type: 'failed'
         });
-        return;
-      }
-      // If no username or password was specified, throw a field-missing error
-      if (this.anyElementsEmpty({ username, password })) {
-        requestFailed({
-          type: "field-missing"
-        });
-        dispatch(sendingRequest(false));
         return;
       }
       // Use auth.js to fake a request
@@ -106,6 +106,14 @@ export function register(username, password) {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
     removeLastFormError();
+    // If no username or password was specified, throw a field-missing error
+    if (this.anyElementsEmpty({ username, password })) {
+      requestFailed({
+        type: "field-missing"
+      });
+      dispatch(sendingRequest(false));
+      return;
+    }
     // Generate salt for password encryption
     const salt = genSalt(username);
     // Encrypt password
@@ -115,14 +123,6 @@ export function register(username, password) {
         requestFailed({
           type: 'failed'
         });
-        return;
-      }
-      // If no username or password was specified, throw a field-missing error
-      if (this.anyElementsEmpty({ username, password })) {
-        requestFailed({
-          type: "field-missing"
-        });
-        dispatch(sendingRequest(false));
         return;
       }
       // Use auth.js to fake a request
