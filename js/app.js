@@ -98,9 +98,11 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route component={App}>
         <Route path="/" component={HomePage} />
-        <Route path="/login" component={LoginPage} onEnter={checkAuth} />
-        <Route path="/register" component={RegisterPage} onEnter={checkAuth} />
-        <Route path="/dashboard" component={Dashboard} onEnter={checkAuth} />
+        <Route onEnter={checkAuth}>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/dashboard" component={Dashboard} />
+        </Route>
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
