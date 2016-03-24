@@ -45,6 +45,7 @@
     "url": "git://github.com/mxstbr/react-boilerplate.git"
   },
   "scripts": {
+      "dev":  "node server.js",
     "start": "NODE_ENV=development node server.js",
     "build": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors -p"
   },
