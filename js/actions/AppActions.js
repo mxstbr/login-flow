@@ -179,7 +179,7 @@ export function sendingRequest(sending) {
  */
 function forwardTo(location) {
   console.log('forwardTo(' + location + ')');
-  browserHistory.pushState(location);
+  browserHistory.push(location);
 }
 
 let lastErrType = "";
