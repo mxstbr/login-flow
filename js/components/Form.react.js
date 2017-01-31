@@ -8,7 +8,6 @@
 
 import React, { Component } from 'react';
 import { changeForm } from '../actions/AppActions';
-import { History } from 'react-router';
 import LoadingButton from './LoadingButton.react';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
