@@ -73,36 +73,6 @@
   animation: shake 150ms ease-in-out;
 }
 
-.form__error-wrapper {
-  display: none;
-  justify-content: center;
-  max-width: calc(100% - 2em);
-  margin: 0 auto;
-  margin-bottom: 1em;
-}
-
-.form__error {
-  display: none;
-  background-color: $error-color;
-  color: white;
-  margin: 0;
-  padding: 0.5em 1em;
-  font-size: 0.8em;
-  font-family: $text-font-stack;
-  user-select: none;
-}
-
-.js-form__err .form__error-wrapper {
-  display: flex;
-}
-
-.js-form__err--user-doesnt-exist .form__error--username-not-registered,
-.js-form__err--username-exists .form__error--username-taken,
-.js-form__err--password-wrong .form__error--wrong-password,
-.js-form__err--field-missing .form__error--field-missing {
-  display: inline-block;
-}
-
 @keyframes shake {
   0% {
     transform: translateX(0);

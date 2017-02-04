@@ -1,0 +1,18 @@
+.error-wrapper {
+    display: flex;
+    justify-content: center;
+    max-width: calc(100% - 2em);
+    margin: 0 auto;
+    margin-bottom: 1em;
+}
+
+.error {
+    display: inline-block;
+    background-color: $error-color;
+    color: white;
+    margin: 0;
+    padding: 0.5em 1em;
+    font-size: 0.8em;
+    font-family: $text-font-stack;
+    user-select: none;
+}

@@ -24,3 +24,4 @@
 @import 'components/_form';
 @import 'components/_nav';
 @import 'components/_loading-indicator';
+@import 'components/_error-message';
