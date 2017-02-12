@@ -24,7 +24,8 @@
  */
 
 import bcrypt from 'bcryptjs';
-import { SET_AUTH, CHANGE_FORM, SENDING_REQUEST } from '../constants/AppConstants';
+import { SET_AUTH, CHANGE_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import * as errorMessages  from '../constants/MessageConstants';
 import auth from '../utils/auth';
 import genSalt from '../utils/salt';
 import { browserHistory } from 'react-router';
@@ -38,12 +39,9 @@ export function login(username, password) {
   return (dispatch) => {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
-    removeLastFormError();
     // If no username or password was specified, throw a field-missing error
     if (anyElementsEmpty({ username, password })) {
-      requestFailed({
-        type: "field-missing"
-      });
+      dispatch(setErrorMessage(errorMessages.FIELD_MISSING));
       dispatch(sendingRequest(false));
       return;
     }
@@ -53,9 +51,7 @@ export function login(username, password) {
     bcrypt.hash(password, salt, (err, hash) => {
       // Something wrong while hashing
       if (err) {
-        requestFailed({
-          type: 'failed'
-        });
+        dispatch(setErrorMessage(errorMessages.GENERAL_ERROR));
         return;
       }
       // Use auth.js to fake a request
@@ -71,7 +67,17 @@ export function login(username, password) {
             password: ""
           }));
         } else {
-          requestFailed(err);
+          switch (err.type) {
+            case 'user-doesnt-exist':
+              dispatch(setErrorMessage(errorMessages.USER_NOT_FOUND));
+              return;
+            case 'password-wrong':
+              dispatch(setErrorMessage(errorMessages.WRONG_PASSWORD));
+              return;
+            default:
+              dispatch(setErrorMessage(errorMessages.GENERAL_ERROR));
+              return;
+          }
         }
       });
     });
@@ -86,11 +92,11 @@ export function logout() {
     dispatch(sendingRequest(true));
     auth.logout((success, err) => {
       if (success === true) {
-        dispatch(sendingRequest(false));
+        dispatch(sendingRequest(false))
         dispatch(setAuthState(false));
         browserHistory.replace(null, '/');
       } else {
-        requestFailed(err);
+        dispatch(setErrorMessage(errorMessages.GENERAL_ERROR));
       }
     });
   }
@@ -105,12 +111,9 @@ export function register(username, password) {
   return (dispatch) => {
     // Show the loading indicator, hide the last error
     dispatch(sendingRequest(true));
-    removeLastFormError();
     // If no username or password was specified, throw a field-missing error
     if (anyElementsEmpty({ username, password })) {
-      requestFailed({
-        type: "field-missing"
-      });
+      dispatch(setErrorMessage(errorMessages.FIELD_MISSING));
       dispatch(sendingRequest(false));
       return;
     }
@@ -120,9 +123,7 @@ export function register(username, password) {
     bcrypt.hash(password, salt, (err, hash) => {
       // Something wrong while hashing
       if (err) {
-        requestFailed({
-          type: 'failed'
-        });
+        dispatch(setErrorMessage(errorMessages.GENERAL_ERROR));
         return;
       }
       // Use auth.js to fake a request
@@ -138,7 +139,14 @@ export function register(username, password) {
             password: ""
           }));
         } else {
-          requestFailed(err);
+          switch (err.type) {
+            case 'username-exists':
+              dispatch(setErrorMessage(errorMessages.USERNAME_TAKEN));
+              return;
+            default:
+              dispatch(setErrorMessage(errorMessages.GENERAL_ERROR));
+              return;
+          }
         }
       });
     });
@@ -173,6 +181,32 @@ export function sendingRequest(sending) {
   return { type: SENDING_REQUEST, sending };
 }
 
+
+/**
+ * Sets the errorMessage state, which displays the ErrorMessage component when it is not empty
+ * @param message
+ */
+function setErrorMessage(message) {
+  return (dispatch) => {
+    dispatch({ type: SET_ERROR_MESSAGE, message });
+
+    const form = document.querySelector('.form-page__form-wrapper');
+    if (form) {
+      form.classList.add('js-form__err-animation');
+      // Remove the animation class after the animation is finished, so it
+      // can play again on the next error
+      setTimeout(() => {
+        form.classList.remove('js-form__err-animation');
+      }, 150);
+
+      // Remove the error message after 3 seconds
+      setTimeout(() => {
+        dispatch({ type: SET_ERROR_MESSAGE, message: '' });
+      }, 3000);
+    }
+  }
+}
+
 /**
  * Forwards the user
  * @param {string} location The route the user should be forwarded to
@@ -182,36 +216,6 @@ function forwardTo(location) {
   browserHistory.push(location);
 }
 
-let lastErrType = "";
-
-/**
- * Called when a request failes
- * @param  {object} err An object containing information about the error
- * @param  {string} err.type The js-form__err + err.type class will be set on the form
- */
-function requestFailed(err) {
-  // Remove the class of the last error so there can only ever be one
-  removeLastFormError();
-  const form = document.querySelector('.form-page__form-wrapper');
-  // And add the respective classes
-  form.classList.add('js-form__err');
-  form.classList.add('js-form__err-animation');
-  form.classList.add('js-form__err--' + err.type);
-  lastErrType = err.type;
-  // Remove the animation class after the animation is finished, so it
-  // can play again on the next error
-  setTimeout(() => {
-    form.classList.remove('js-form__err-animation');
-  }, 150);
-}
-
-/**
- * Removes the last error from the form
- */
-function removeLastFormError() {
-  const form = document.querySelector('.form-page__form-wrapper');
-  form.classList.remove('js-form__err--' + lastErrType);
-}
 
 /**
  * Checks if any elements of a JSON object are empty
