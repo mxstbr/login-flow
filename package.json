@@ -20,6 +20,7 @@
     "babel-eslint": "^4.1.2",
     "babel-loader": "^5.3.2",
     "babel-plugin-react-transform": "^1.0.5",
+    "cross-env": "^4.0.0",
     "css-loader": "^0.23.0",
     "cssnano": "^3.0.1",
     "eslint": "^1.4.1",
@@ -45,7 +46,7 @@
     "url": "git://github.com/mxstbr/react-boilerplate.git"
   },
   "scripts": {
-    "start": "NODE_ENV=development node server.js",
+    "start": "cross-env NODE_ENV=development node server.js",
     "build": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors -p"
   },
   "author": "Max Stoiber",
